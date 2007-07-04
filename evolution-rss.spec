@@ -37,6 +37,7 @@ Czytnik kanałów informacyjnych RSS dla Evolution
 %{__autoconf}
 %{__automake}
 %configure \
+	privdatadir=%{_datadir}/%{name} \
 	--enable-gtk-doc \
 	--with-html-dir=%{_gtkdocdir}
 
@@ -64,4 +65,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/bonobo/servers/*.server
 %attr(755,root,root) %{_libdir}/evolution/*/plugins/*.so
 %{_libdir}/evolution/*/plugins/org*
+%{_datadir}/evolution/*/errors/org*
 %{_datadir}/evolution/*/images/*.png
