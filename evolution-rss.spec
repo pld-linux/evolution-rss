@@ -2,7 +2,7 @@ Summary:	RSS Reader for Evolution Mail
 Summary(pl.UTF-8):	Czytnik kanałów informacyjnych RSS dla Evolution
 Name:		evolution-rss
 Version:	0.0.4
-Release:	0.1
+Release:	0.3
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://mips.edu.ms/%{name}-%{version}.tar.gz
@@ -61,7 +61,9 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
-%{_datadir}/%{name}/glade/rss-ui.glade
+%dir %{_datadir}/%{name}
+%dir %{_datadir}/%{name}/glade
+%{_datadir}/%{name}/glade/*.glade
 %{_libdir}/bonobo/servers/*.server
 %attr(755,root,root) %{_libdir}/evolution/*/plugins/*.so
 %{_libdir}/evolution/*/plugins/org*
