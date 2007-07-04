@@ -1,8 +1,9 @@
+#TODO - change default time check - now is 1 min
 Summary:	RSS Reader for Evolution Mail
 Summary(pl.UTF-8):	Czytnik kanałów informacyjnych RSS dla Evolution
 Name:		evolution-rss
 Version:	0.0.4
-Release:	0.3
+Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://mips.edu.ms/%{name}-%{version}.tar.gz
