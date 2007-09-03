@@ -10,8 +10,6 @@ Source0:	http://mips.edu.ms/%{name}-%{version}.tar.gz
 # Source0-md5:	138efe707780f3ac4a56867d0a0cdf91
 URL:		http://mips.edu.ms/evo/index.php/Evolution_RSS_Reader_Plugin
 BuildRequires:	GConf2-devel >= 2.18.0.1
-BuildRequires:	autoconf >= 2.53
-BuildRequires:	automake
 BuildRequires:	evolution-data-server-devel >= 1.10.0
 BuildRequires:	gtk+2-devel >= 2:2.10.10
 BuildRequires:	intltool >= 0.35.5
