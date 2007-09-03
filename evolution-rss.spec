@@ -3,7 +3,7 @@ Summary:	RSS Reader for Evolution Mail
 Summary(pl.UTF-8):	Czytnik kanałów informacyjnych RSS dla Evolution
 Name:		evolution-rss
 Version:	0.0.4
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://mips.edu.ms/%{name}-%{version}.tar.gz
@@ -34,9 +34,6 @@ Czytnik kanałów informacyjnych RSS dla Evolution.
 %setup -q
 
 %build
-%{__aclocal}
-%{__autoconf}
-%{__automake}
 %configure \
 	privdatadir=%{_datadir}/%{name} \
 	--enable-gtk-doc \
