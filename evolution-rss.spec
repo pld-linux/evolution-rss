@@ -2,15 +2,18 @@
 Summary:	RSS Reader for Evolution Mail
 Summary(pl.UTF-8):	Czytnik kanałów informacyjnych RSS dla Evolution
 Name:		evolution-rss
-Version:	0.0.4
-Release:	3
+Version:	0.0.5
+Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://mips.edu.ms/%{name}-%{version}.tar.gz
-# Source0-md5:	138efe707780f3ac4a56867d0a0cdf91
+# Source0-md5:	227a95b7b7d5c90e930226a9534551c6
+Patch0:		%{name}-ac.patch
 URL:		http://mips.edu.ms/evo/index.php/Evolution_RSS_Reader_Plugin
 BuildRequires:	GConf2-devel >= 2.18.0.1
-BuildRequires:	evolution-data-server-devel >= 1.10.0
+BuildRequires:	autoconf
+BuildRequires:	evolution-data-server-devel >= 1.12.0
+BuildRequires:	evolution-devel >= 2.12.0
 BuildRequires:	gtk+2-devel >= 2:2.10.10
 BuildRequires:	intltool >= 0.35.5
 BuildRequires:	libgnomeui-devel >= 2.18.1
@@ -18,7 +21,7 @@ BuildRequires:	libsoup-devel >= 2.2.100
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.197
 Requires(post,preun):	GConf2
-Requires:	evolution >= 2.10.0
+Requires:	evolution >= 2.12.0
 Requires:	gtk+2 >= 2:2.10.10
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -30,10 +33,11 @@ Czytnik kanałów informacyjnych RSS dla Evolution.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
+%{__autoconf}
 %configure \
-	privdatadir=%{_datadir}/%{name} \
 	--enable-gtk-doc \
 	--with-html-dir=%{_gtkdocdir}
 
@@ -57,9 +61,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
-%dir %{_datadir}/%{name}
-%dir %{_datadir}/%{name}/glade
-%{_datadir}/%{name}/glade/*.glade
+%{_datadir}/evolution/*/glade/*.glade
 %{_libdir}/bonobo/servers/*.server
 %attr(755,root,root) %{_libdir}/evolution/*/plugins/*.so
 %{_libdir}/evolution/*/plugins/org*
