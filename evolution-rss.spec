@@ -2,12 +2,12 @@
 Summary:	RSS Reader for Evolution Mail
 Summary(pl.UTF-8):	Czytnik kanałów informacyjnych RSS dla Evolution
 Name:		evolution-rss
-Version:	0.0.5
+Version:	0.0.6
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://mips.edu.ms/%{name}-%{version}.tar.gz
-# Source0-md5:	227a95b7b7d5c90e930226a9534551c6
+# Source0-md5:	3c63c1c794ed4ee6171b495e3abd20ac
 Patch0:		%{name}-ac.patch
 URL:		http://mips.edu.ms/evo/index.php/Evolution_RSS_Reader_Plugin
 BuildRequires:	GConf2-devel >= 2.18.0.1
