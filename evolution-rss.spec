@@ -1,4 +1,8 @@
-#TODO - change default time check - now is 1 min
+#
+# TODO:
+# - change default time check - now is 1 min
+# - add webkit / xulrunner bcond
+#
 Summary:	RSS Reader for Evolution Mail
 Summary(pl.UTF-8):	Czytnik kanałów informacyjnych RSS dla Evolution
 Name:		evolution-rss
@@ -10,20 +14,25 @@ Source0:	http://mips.edu.ms/%{name}-%{version}.tar.gz
 # Source0-md5:	3c63c1c794ed4ee6171b495e3abd20ac
 Patch0:		%{name}-ac.patch
 URL:		http://mips.edu.ms/evo/index.php/Evolution_RSS_Reader_Plugin
-BuildRequires:	GConf2-devel >= 2.18.0.1
 BuildRequires:	autoconf
-BuildRequires:	evolution-data-server-devel >= 1.12.0
+BuildRequires:	automake
 BuildRequires:	evolution-devel >= 2.12.0
-BuildRequires:	gtk+2-devel >= 2:2.10.10
-BuildRequires:	intltool >= 0.35.5
-BuildRequires:	libgnomeui-devel >= 2.18.1
+BuildRequires:	gtk+2-devel >= 2:2.12.1
+BuildRequires:	intltool >= 0.36.2
+BuildRequires:	libglade2-devel
+BuildRequires:	libgnomeui-devel >= 2.20.0
 BuildRequires:	libsoup-devel >= 2.2.100
+BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.197
-Requires(post,preun):	GConf2
+BuildRequires:	xulrunner-devel
 Requires:	evolution >= 2.12.0
 Requires:	gtk+2 >= 2:2.10.10
+%requires_eq	xulrunner-libs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+# we have strict deps for it
+%define		_noautoreq	libxpcom.so
 
 %description
 RSS Reader for Evolution Mail.
@@ -36,19 +45,20 @@ Czytnik kanałów informacyjnych RSS dla Evolution.
 %patch0 -p1
 
 %build
+%{__intltoolize}
+%{__libtoolize}
+%{__aclocal} -I m4
 %{__autoconf}
-%configure \
-	--enable-gtk-doc \
-	--with-html-dir=%{_gtkdocdir}
-
+%{__autoheader}
+%{__automake}
+%configure
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
+	DESTDIR=$RPM_BUILD_ROOT
 
 %find_lang %{name}
 
