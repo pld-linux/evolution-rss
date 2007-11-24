@@ -31,7 +31,7 @@ Requires:	gtk+2 >= 2:2.10.10
 %requires_eq	xulrunner-libs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-# we have strict deps for it
+# we have strict deps for xulrunner-libs
 %define		_noautoreq	libxpcom.so
 
 %description
