@@ -1,11 +1,11 @@
-diff -u evolution-rss-0.0.5/configure.ac evolution-rss-0.0.5-ac/configure.ac
---- evolution-rss-0.0.5/configure.ac	2007-09-02 09:28:58.000000000 +0200
-+++ evolution-rss-0.0.5-ac/configure.ac	2007-10-14 01:08:38.000000000 +0200
-@@ -196,7 +196,7 @@
+diff -rNu evolution-rss-0.0.8/configure.ac evolution-rss-0.0.8.new/configure.ac
+--- evolution-rss-0.0.8/configure.ac	2008-03-03 08:07:20.000000000 +0100
++++ evolution-rss-0.0.8.new/configure.ac	2008-03-14 17:52:11.000000000 +0100
+@@ -313,7 +313,7 @@
  serverdir="$BONOBO_LIBDIR/bonobo/servers"
  AC_SUBST(serverdir)
  
--privdatadir='${datadir}'/evolution/$EVOLUTION_BASE_VERSION
+-privdatadir='${datadir}'/evolution/$EVOLUTION_EXEC_VERSION
 +privdatadir='${datadir}'/evolution/"$EVOLUTION_EXEC_VERSION"
  AC_SUBST(privdatadir)
  
