@@ -1,33 +1,36 @@
 #
 # TODO:
-# - change default time check - now is 1 min
 # - add webkit / xulrunner bcond
 #
 Summary:	RSS Reader for Evolution Mail
 Summary(pl.UTF-8):	Czytnik kanałów informacyjnych RSS dla Evolution
 Name:		evolution-rss
-Version:	0.0.6
-Release:	5
+Version:	0.0.8
+Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://mips.edu.ms/%{name}-%{version}.tar.gz
-# Source0-md5:	3c63c1c794ed4ee6171b495e3abd20ac
+Source0:	http://gnome.eu.org/%{name}-%{version}.tar.gz
+# Source0-md5:	c5adce093e332573bc1fcfaf23c1f8b6
 Patch0:		%{name}-ac.patch
-URL:		http://mips.edu.ms/evo/index.php/Evolution_RSS_Reader_Plugin
+URL:		http://gnome.eu.org/evo/index.php/Evolution_RSS_Reader_Plugin
+BuildRequires:	GConf2-devel >= 2.22.0
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	evolution-devel >= 2.12.0
-BuildRequires:	gtk+2-devel >= 2:2.12.1
+BuildRequires:	dbus-glib-devel >= 0.74
+BuildRequires:	evolution-devel >= 2.22.0
+BuildRequires:	gettext-devel
+BuildRequires:	gtk+2-devel >= 2:2.12.8
 BuildRequires:	intltool >= 0.36.2
-BuildRequires:	libglade2-devel
-BuildRequires:	libgnomeui-devel >= 2.20.0
-BuildRequires:	libsoup-devel >= 2.2.100
+BuildRequires:	libglade2-devel >= 1:2.6.2
+BuildRequires:	libgnomeui-devel >= 2.22.0
+BuildRequires:	libsoup-devel >= 2.4.0
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.197
 BuildRequires:	xulrunner-devel
-Requires:	evolution >= 2.12.0
-Requires:	gtk+2 >= 2:2.10.10
+Requires(post,postun):	GConf2
+Requires:	evolution >= 2.22.0
+Requires:	gtk+2 >= 2:2.12.8
 %requires_eq	xulrunner-libs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -60,20 +63,28 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/*/plugins/liborg-gnome-evolution-rss.la
+
 %find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p /sbin/ldconfig
-%postun	-p /sbin/ldconfig
+%post
+%gconf_schema_install evolution-rss.schemas
+
+%preun
+%gconf_schema_uninstall evolution-rss.schemas
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
-%{_datadir}/evolution/*/glade/*.glade
-%{_libdir}/bonobo/servers/*.server
-%attr(755,root,root) %{_libdir}/evolution/*/plugins/*.so
-%{_libdir}/evolution/*/plugins/org*
-%{_datadir}/evolution/*/errors/org*
-%{_datadir}/evolution/*/images/*.png
+%attr(755,root,root) %{_bindir}/evolution-import-rss
+%attr(755,root,root) %{_libdir}/evolution/*/plugins/liborg-gnome-evolution-rss.so
+%{_libdir}/bonobo/servers/GNOME_Evolution_RSS_2.22.server
+%{_libdir}/evolution/*/plugins/org-gnome-evolution-rss.eplug
+%{_libdir}/evolution/*/plugins/org-gnome-evolution-rss.xml
+%{_sysconfdir}/gconf/schemas/evolution-rss.schemas
+%{_datadir}/evolution/*/errors/org-gnome-evolution-rss.error
+%{_datadir}/evolution/*/glade/rss-ui.glade
+%{_datadir}/evolution/*/images/rss.png
