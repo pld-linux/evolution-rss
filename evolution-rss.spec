@@ -1,17 +1,19 @@
 #
-# TODO:
-# - add webkit / xulrunner bcond
+# Conditional build:
+%bcond_without	xulrunner	# without XULRunner render
+%bcond_without	webkit		# without WebKit render
 #
 Summary:	RSS Reader for Evolution Mail
 Summary(pl.UTF-8):	Czytnik kanałów informacyjnych RSS dla Evolution
 Name:		evolution-rss
-Version:	0.0.8
-Release:	3
+Version:	0.1.0
+Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://gnome.eu.org/%{name}-%{version}.tar.gz
-# Source0-md5:	c5adce093e332573bc1fcfaf23c1f8b6
+# Source0-md5:	63479fcf4c3af998ab2794e5a0f075f6
 Patch0:		%{name}-ac.patch
+Patch1:		%{name}-libxul.patch
 URL:		http://gnome.eu.org/evo/index.php/Evolution_RSS_Reader_Plugin
 BuildRequires:	GConf2-devel >= 2.22.0
 BuildRequires:	autoconf
@@ -20,6 +22,7 @@ BuildRequires:	dbus-glib-devel >= 0.74
 BuildRequires:	evolution-devel >= 2.22.0
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.12.8
+%{?with_webkit:BuildRequires:	gtk-webkit-devel}
 BuildRequires:	intltool >= 0.36.2
 BuildRequires:	libglade2-devel >= 1:2.6.2
 BuildRequires:	libgnomeui-devel >= 2.22.0
@@ -27,11 +30,11 @@ BuildRequires:	libsoup-devel >= 2.4.0
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.197
-BuildRequires:	xulrunner-devel
+%{?with_xulrunner:BuildRequires:	xulrunner-devel >= 1.9-5}
 Requires(post,postun):	GConf2
 Requires:	evolution >= 2.22.0
 Requires:	gtk+2 >= 2:2.12.8
-%requires_eq	xulrunner-libs
+%{?with_xulrunner:%requires_eq	xulrunner-libs}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # we have strict deps for xulrunner-libs
@@ -46,6 +49,7 @@ Czytnik kanałów informacyjnych RSS dla Evolution.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__intltoolize}
@@ -54,7 +58,9 @@ Czytnik kanałów informacyjnych RSS dla Evolution.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%configure
+%configure \
+	%{?!with_xulrunner:--disable-gecko} \
+	%{?!with_webkit:--disable-webkit}
 %{__make}
 
 %install
@@ -86,5 +92,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/evolution/*/plugins/org-gnome-evolution-rss.xml
 %{_sysconfdir}/gconf/schemas/evolution-rss.schemas
 %{_datadir}/evolution/*/errors/org-gnome-evolution-rss.error
-%{_datadir}/evolution/*/glade/rss-ui.glade
-%{_datadir}/evolution/*/images/rss.png
+%{_datadir}/evolution/*/glade/*.glade
+%{_datadir}/evolution/*/images/*.png
