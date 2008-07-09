@@ -1,0 +1,12 @@
+diff -urN evolution-rss-0.1.0/configure.ac evolution-rss-0.1.0.new/configure.ac
+--- evolution-rss-0.1.0/configure.ac	2008-07-01 21:19:03.000000000 +0200
++++ evolution-rss-0.1.0.new/configure.ac	2008-07-09 20:06:44.158113382 +0200
+@@ -197,7 +197,7 @@
+ 		AC_SUBST(HAVE_RENDERKIT)
+ 		AC_SUBST(HAVE_GTKMOZEMEBED)
+ #		RENDER_CFLAGS="$GECKO_CFLAGS -I$GECKO_INCLUDE_ROOT" 
+-		RENDER_CFLAGS=$GECKO_CFLAGS 
++		RENDER_CFLAGS="$GECKO_CFLAGS -I/usr/include/xulrunner/gtkembedmoz" 
+ 		GECKO_RPATH="-Wl,--rpath -Wl,"$GECKO_LIBDIR
+ 		GECKO_HOME=$GECKO_LIBDIR
+ 		AC_SUBST([GECKO_RPATH])
