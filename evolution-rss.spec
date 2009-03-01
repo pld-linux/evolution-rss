@@ -6,12 +6,12 @@
 Summary:	RSS Reader for Evolution Mail
 Summary(pl.UTF-8):	Czytnik kanałów informacyjnych RSS dla Evolution
 Name:		evolution-rss
-Version:	0.1.1
-Release:	4
+Version:	0.1.2
+Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://gnome.eu.org/%{name}-%{version}.tar.gz
-# Source0-md5:	94e3ce3a44f8ae4249df974a8d2a3ed3
+# Source0-md5:	a7c04b6f330c49785d34f59a19537798
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-libxul.patch
 URL:		http://gnome.eu.org/evo/index.php/Evolution_RSS_Reader_Plugin
