@@ -6,7 +6,7 @@ diff -urN evolution-rss-0.1.0/configure.ac evolution-rss-0.1.0.new/configure.ac
  		AC_SUBST(HAVE_GTKMOZEMEBED)
  #		RENDER_CFLAGS="$GECKO_CFLAGS -I$GECKO_INCLUDE_ROOT" 
 -		RENDER_CFLAGS=$GECKO_CFLAGS 
-+		RENDER_CFLAGS="$GECKO_CFLAGS -I/usr/include/xulrunner/gtkembedmoz" 
++		RENDER_CFLAGS="$GECKO_CFLAGS -I/usr/include/xulrunner/gtkembedmoz -I/usr/include/xulrunner/docshell" 
  		GECKO_RPATH="-Wl,--rpath -Wl,"$GECKO_LIBDIR
  		GECKO_HOME=$GECKO_LIBDIR
  		AC_SUBST([GECKO_RPATH])
