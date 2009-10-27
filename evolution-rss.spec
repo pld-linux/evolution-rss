@@ -6,12 +6,12 @@
 Summary:	RSS Reader for Evolution Mail
 Summary(pl.UTF-8):	Czytnik kanałów informacyjnych RSS dla Evolution
 Name:		evolution-rss
-Version:	0.1.2
-Release:	8
+Version:	0.1.4
+Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://gnome.eu.org/%{name}-%{version}.tar.gz
-# Source0-md5:	a7c04b6f330c49785d34f59a19537798
+# Source0-md5:	e6df6ae91fe41882ccb54231b28d7efd
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-libxul.patch
 URL:		http://gnome.eu.org/evo/index.php/Evolution_RSS_Reader_Plugin
@@ -88,7 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_bindir}/evolution-import-rss
 %attr(755,root,root) %{_libdir}/evolution/*/plugins/liborg-gnome-evolution-rss.so
-%{_libdir}/bonobo/servers/GNOME_Evolution_RSS_2.26.server
+%{_libdir}/bonobo/servers/GNOME_Evolution_RSS_2.28.server
 %{_libdir}/evolution/*/plugins/org-gnome-evolution-rss.eplug
 %{_libdir}/evolution/*/plugins/org-gnome-evolution-rss.xml
 %{_sysconfdir}/gconf/schemas/evolution-rss.schemas
