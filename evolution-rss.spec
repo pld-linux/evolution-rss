@@ -60,8 +60,8 @@ Czytnik kanałów informacyjnych RSS dla Evolution.
 %{__autoheader}
 %{__automake}
 %configure \
-	%{?!with_xulrunner:--disable-gecko} \
-	%{?!with_webkit:--disable-webkit}
+	%{!?with_xulrunner:--disable-gecko} \
+	%{!?with_webkit:--disable-webkit}
 %{__make}
 
 %install
