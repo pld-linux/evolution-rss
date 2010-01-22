@@ -21,6 +21,7 @@ BuildRequires:	automake
 BuildRequires:	dbus-glib-devel >= 0.74
 BuildRequires:	evolution-devel >= 2.26.0
 BuildRequires:	gettext-devel
+BuildRequires:	gnome-common
 BuildRequires:	gtk+2-devel >= 2:2.14.0
 %{?with_webkit:BuildRequires:	gtk-webkit-devel}
 BuildRequires:	intltool >= 0.40.0
