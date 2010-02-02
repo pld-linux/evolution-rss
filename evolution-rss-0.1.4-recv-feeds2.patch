@@ -1,0 +1,34 @@
+diff -Naur evolution-rss-0.1.4/src/rss.c evolution-rss-0.1.4-mod/src/rss.c
+--- evolution-rss-0.1.4/src/rss.c	2009-08-26 05:00:09.000000000 -0400
++++ evolution-rss-0.1.4-mod/src/rss.c	2009-11-04 21:35:39.535483549 -0500
+@@ -2812,7 +2812,11 @@
+         GMutex *lock;
+ 
+         /* states/data used during shutdown */
+-        enum { MC_QUIT_START, MC_QUIT_SYNC, MC_QUIT_THREADS } quit_state;
++#if EVOLUTION_VERSION >= 22800
++	enum { MC_QUIT_NOT_START, MC_QUIT_START, MC_QUIT_SYNC, MC_QUIT_THREADS } quit_state;
++#else
++	enum { MC_QUIT_START, MC_QUIT_SYNC, MC_QUIT_THREADS } quit_state;
++#endif
+ };
+ 
+ void
+@@ -2829,7 +2833,7 @@
+ 		deleted = 1;
+ 
+ 	MailComponent *mc = mail_component_peek ();
+-        if (mc->priv->quit_state != -1)
++        if (mc->priv->quit_state != MC_QUIT_NOT_START)
+ 		rf->cancel_all=1;
+ 
+ 	d(g_print("taskbar_op_finish() queue:%d\n", rf->feed_queue));
+@@ -3194,7 +3198,7 @@
+ {
+ 	MailComponent *mc = mail_component_peek ();
+ 	g_print("stAte:%d\n", mc->priv->quit_state);
+-        if (mc->priv->quit_state != -1)
++        if (mc->priv->quit_state != MC_QUIT_NOT_START)
+ 		rf->cancel=1;
+ 
+ 	if (!rf->pending && !rf->feed_queue && !rf->cancel_all && rf->online) {
