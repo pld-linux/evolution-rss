@@ -28,12 +28,11 @@ BuildRequires:	gtk+2-devel >= 2:2.14.0
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libglade2-devel >= 1:2.6.2
 BuildRequires:	libgnomeui-devel >= 2.24.0
-BuildRequires:	libpng12-devel
 BuildRequires:	libsoup-devel >= 2.4.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.197
+BuildRequires:	rpmbuild(macros) >= 1.527
 %{?with_xulrunner:BuildRequires:	xulrunner-devel >= 1.9-5}
 Requires(post,postun):	GConf2
 Requires:	evolution >= 2.26.0
@@ -64,8 +63,9 @@ Czytnik kanałów informacyjnych RSS dla Evolution.
 %{__autoheader}
 %{__automake}
 %configure \
-	%{!?with_xulrunner:--disable-gecko} \
-	%{!?with_webkit:--disable-webkit}
+	%{__enable_disable xulrunner gecko} \
+	%{__with xulrunner gecko libxul} \
+	%{__enable_disable webkit}
 %{__make}
 
 %install
@@ -74,7 +74,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/*/plugins/liborg-gnome-evolution-rss.la
+rm $RPM_BUILD_ROOT%{_libdir}/evolution/*/plugins/liborg-gnome-evolution-rss.la
 
 %find_lang %{name}
 
