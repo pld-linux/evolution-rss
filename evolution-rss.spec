@@ -7,13 +7,14 @@ Summary:	RSS Reader for Evolution Mail
 Summary(pl.UTF-8):	Czytnik kanałów informacyjnych RSS dla Evolution
 Name:		evolution-rss
 Version:	0.1.4
-Release:	7
+Release:	8
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://gnome.eu.org/%{name}-%{version}.tar.gz
 # Source0-md5:	e6df6ae91fe41882ccb54231b28d7efd
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-libxul.patch
+Patch2:		%{name}-0.1.4-recv-feeds2.patch
 URL:		http://gnome.eu.org/evo/index.php/Evolution_RSS_Reader_Plugin
 BuildRequires:	GConf2-devel >= 2.26.0
 BuildRequires:	autoconf
@@ -27,6 +28,7 @@ BuildRequires:	gtk+2-devel >= 2:2.14.0
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libglade2-devel >= 1:2.6.2
 BuildRequires:	libgnomeui-devel >= 2.24.0
+BuildRequires:	libpng12-devel
 BuildRequires:	libsoup-devel >= 2.4.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
@@ -52,6 +54,7 @@ Czytnik kanałów informacyjnych RSS dla Evolution.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__intltoolize}
