@@ -19,7 +19,7 @@ BuildRequires:	automake
 BuildRequires:	dbus-glib-devel >= 0.74
 BuildRequires:	evolution-devel >= 2.26.0
 BuildRequires:	geoclue-devel
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	gnome-common
 BuildRequires:	gtk+2-devel >= 2:2.14.0
 %{?with_webkit:BuildRequires:	gtk-webkit-devel}
